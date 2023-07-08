@@ -100,5 +100,8 @@ files:
   learner_created: false
 feedback_link: https://hyperskill.org/projects/343/stages/2019/implement#comment
 check_profile: hyperskill_python
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 08 Jul 2023 06:29:45 UTC"
 record: -1

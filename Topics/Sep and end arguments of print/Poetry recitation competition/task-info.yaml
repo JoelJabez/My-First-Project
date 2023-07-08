@@ -1,0 +1,15 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    poem = ['The night', 'the pharmacy', 'the street', 'the pointless lamppost in the mist']
+    print(*poem, sep='!')
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/24623#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 08 Jul 2023 06:23:10 UTC"
+record: -1
+submission_language: python3

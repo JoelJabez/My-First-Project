@@ -8,20 +8,23 @@ from hstest import StageTest, TestedProgram, CheckResult, dynamic_test
 # Pancake: $80.0
 #
 # Income: $5405.0
+# Staff expenses: $4170
+# Other expenses: $220
+# Net income: $1015
 
 
 class PrintFirstProject(StageTest):
     @dynamic_test()
     def test_first_project(self):
         pr = TestedProgram()
-
         output = pr.start().lower().strip()
         output_length = len(list(filter(None, output.splitlines())))
         if not output:
             return CheckResult.wrong("Your program didn't print any output.")
-        elif output_length != 8:
-            return CheckResult.wrong(f'Your program should output 8 lines, '
-                                     f'but {output_length} lines were found.')
+        elif output_length != 9:
+            return CheckResult.wrong(f'Your program should output 9 lines before taking user input:\n'
+                                     f'the earned amount for each item, income, and the "Staff expenses" line.\n'
+                                     f'{output_length} lines were found.')
 
         if 'earned' not in output.lower():
             return CheckResult.wrong("Your program didn't print the 'Earned amount' line")
@@ -39,20 +42,34 @@ class PrintFirstProject(StageTest):
             return CheckResult.wrong("Your program should print the 'Pancake' as an item")
         elif 'income' not in output.lower():
             return CheckResult.wrong("Your program should print the income on a separate line")
+        elif 'staff expenses' not in output:
+            return CheckResult.wrong("Your program should ask the user for input with the 'Staff expenses' line")
         elif '202' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Bubblegum")
+            return CheckResult.wrong("Incorrect earned amount for Bubblegum.")
         elif '118' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Toffee")
+            return CheckResult.wrong("Incorrect earned amount for Toffee.")
         elif '2250' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Ice Cream")
+            return CheckResult.wrong("Incorrect earned amount for Ice Cream.")
         elif '1680' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Milk chocolate")
+            return CheckResult.wrong("Incorrect earned amount for Milk chocolate.")
         elif '1075' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Doughnut")
+            return CheckResult.wrong("Incorrect earned amount for Doughnut.")
         elif '80' not in output.lower():
-            return CheckResult.wrong("Incorrect earned amount for Pancake")
+            return CheckResult.wrong("Incorrect earned amount for Pancake.")
         elif '5405' not in output.lower():
             return CheckResult.wrong("Incorrect total income!")
+        if not pr.is_waiting_input():
+            return CheckResult.wrong('Your program should ask the user to input the staff expenses')
+        output1 = pr.execute('4170').lower().strip()
+        if 'other expenses' not in output1:
+            return CheckResult.wrong("Your program should ask the user for input with the 'Other expenses' line")
+        if not pr.is_waiting_input():
+            return CheckResult.wrong('Your program should ask the user to input other expenses')
+        output2 = pr.execute('220').lower().strip()
+        if 'net income' not in output2:
+            return CheckResult.wrong("Your program should print the net income on a separate line")
+        elif '1015' not in output2.lower():
+            return CheckResult.wrong("Incorrect net income!")
         else:
             return CheckResult.correct()
 
