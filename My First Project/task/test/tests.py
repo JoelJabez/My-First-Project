@@ -1,12 +1,13 @@
 from hstest import StageTest, TestedProgram, CheckResult, dynamic_test
 
-
-# Bubblegum: $2
-# Toffee: $0.2
-# Ice cream: $5
-# Milk chocolate: $4
-# Doughnut: $2.5
-# Pancake: $3.2
+# Bubblegum: $202.0
+# Toffee: $118.0
+# Ice cream: $2250.0
+# Milk chocolate: $1680.0
+# Doughnut: $1075.0
+# Pancake: $80.0
+#
+# Income: $5405.0
 
 
 class PrintFirstProject(StageTest):
@@ -18,12 +19,12 @@ class PrintFirstProject(StageTest):
         output_length = len(list(filter(None, output.splitlines())))
         if not output:
             return CheckResult.wrong("Your program didn't print any output.")
-        elif output_length != 7:
-            return CheckResult.wrong(f'Your program should output 7 lines, '
+        elif output_length != 8:
+            return CheckResult.wrong(f'Your program should output 8 lines, '
                                      f'but {output_length} lines were found.')
 
-        if 'prices' not in output.lower():
-            return CheckResult.wrong("Your program didn't print the 'Prices:' line")
+        if 'earned' not in output.lower():
+            return CheckResult.wrong("Your program didn't print the 'Earned amount' line")
         elif 'bubblegum' not in output.lower():
             return CheckResult.wrong("Your program should print the 'Bubblegum' as an item")
         elif 'toffee' not in output.lower():
@@ -36,18 +37,22 @@ class PrintFirstProject(StageTest):
             return CheckResult.wrong("Your program should print the 'Doughnut' as an item")
         elif 'pancake' not in output.lower():
             return CheckResult.wrong("Your program should print the 'Pancake' as an item")
-        elif '2' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Bubblegum")
-        elif '0.2' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Toffee")
-        elif '5' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Ice cream")
-        elif '4' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Milk chocolate")
-        elif '2.5' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Doughnut")
-        elif '3.2' not in output.lower():
-            return CheckResult.wrong("Incorrect price for Pancake")
+        elif 'income' not in output.lower():
+            return CheckResult.wrong("Your program should print the income on a separate line")
+        elif '202' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Bubblegum")
+        elif '118' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Toffee")
+        elif '2250' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Ice Cream")
+        elif '1680' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Milk chocolate")
+        elif '1075' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Doughnut")
+        elif '80' not in output.lower():
+            return CheckResult.wrong("Incorrect earned amount for Pancake")
+        elif '5405' not in output.lower():
+            return CheckResult.wrong("Incorrect total income!")
         else:
             return CheckResult.correct()
 
